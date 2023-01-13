@@ -24,13 +24,40 @@ const loginFormHandler = async (event) => {
 
 const signupFormHandler = async (event) => {
   event.preventDefault();
+console.log(event.target.children)
+  const inputs = document.querySelectorAll(".form-input")
+ console.log(inputs)
+//  const formGroups = event.target.children.forEach((group,idx) =>{
+//   console.log(group,idx)
+//   return group[1]
+//  })
+//  console.log(formGroups)
+  // const name = document.querySelector('#name-signup').value.trim();
+  // const email = document.querySelector('#email-signup').value.trim();
+  // const password = document.querySelector('#password-signup').value.trim();
 
-  const name = document.querySelector('#name-signup').value.trim();
-  const email = document.querySelector('#email-signup').value.trim();
-  const password = document.querySelector('#password-signup').value.trim();
+  let name=""
+  let email=""
+  let password=""
 
+inputs.forEach((input,idx) =>{
+  console.log(input,idx)
+  console.log(input.type)
+  if (input.type === "password"){
+    password = input.value
+  }
+
+  if(input.type === "email"){
+    email = input.value
+  }
+if(input.type === "text"){
+  name = input.value
+}
+  
+})
+ console.log(name, email, password)
   if (name && email && password) {
-    const response = await fetch('/api/users', {
+    const response = await fetch('/api/Users', {
       method: 'POST',
       body: JSON.stringify({ name, email, password }),
       headers: { 'Content-Type': 'application/json' },
@@ -44,10 +71,4 @@ const signupFormHandler = async (event) => {
   }
 };
 
-document
-  .querySelector('.login-form')
-  .addEventListener('submit', loginFormHandler);
 
-document
-  .querySelector('.signup-form')
-  .addEventListener('submit', signupFormHandler);
