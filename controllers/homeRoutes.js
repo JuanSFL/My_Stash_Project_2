@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { Product, User } = require('../models');
+const { Product, User, History } = require('../models');
+
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -7,7 +8,7 @@ router.get('/', async (req, res) => {
     // Get all products and JOIN with user data
     const productData = await Product.findAll({
       
-      // include: [
+      // include: [ ////user_id: req.session.user_id
       //   {
       //     model: User,
       //     attributes: ['name'],
@@ -20,6 +21,7 @@ router.get('/', async (req, res) => {
     console.log(productsSerialized)
     // // Serialize data so the template can read it
     // const products = productData.map((product) => product.get({ plain: true }));
+
     // Pass serialized data and session flag into template
     res.render('homepage', { 
       products: productsSerialized
@@ -31,24 +33,71 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/product/:id', async (req, res) => {
-  try {
-    const productData = await product.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ['name'],
-        },
-      ],
-    });
+  if (!req.session.loggedIn) {
+    res.redirect('/login');
+  } else {
+    try {
+      const productData = await Product.findOne({ user_id: req.session.user_id, id: req.params.id}, {
+        include: [
+          {
+            model: Product,
+            attributes: [
+              'id',
+              'type',
+              'brand',
+              'name',
+              'description',
+              'condition',
+              'color',
+              'price',
+              'user_id',
+            ],
+          },
+        ],
+      });
 
-    const product = productData.get({ plain: true });
+      const product = productData.get({ plain: true });
 
-    res.render('product', {
-      ...product,
-      logged_in: req.session.logged_in
-    });
-  } catch (err) {
-    res.status(500).json(err);
+      res.render('product', {
+        ...product,
+        logged_in: req.session.logged_in
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+});
+
+router.get('/history/:id', async (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('/login');
+  } else {
+    try {
+      const historyData = await Product.findOne({ user_id: req.session.user_id, id: req.params.id}, {
+        include: [
+          {
+            model: Product,
+            attributes: [
+              'id',
+              'date',
+              'itemListed',
+              'itemSold',
+              'itemPurchased',
+              'user_id',
+            ],
+          },
+        ],
+      });
+
+      const history = historyData.get({ plain: true });
+
+      res.render('history', {
+        ...history,
+        logged_in: req.session.logged_in
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
   }
 });
 

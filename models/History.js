@@ -1,4 +1,4 @@
-const { Model, DataTypes, FLOAT } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 class History extends Model {}
