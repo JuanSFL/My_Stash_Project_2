@@ -1,4 +1,4 @@
-const { Model, DataTypes, FLOAT } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 class Product extends Model {}
@@ -19,7 +19,7 @@ Product.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    name: {
+    product_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },

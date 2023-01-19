@@ -11,7 +11,7 @@ Product.belongsTo(User, {
   foreignKey: 'user_id'
 });
 
-History.belongsTo(User, Product, {
+History.belongsTo(User, {
   foreignKey: 'user_id'
 });
 

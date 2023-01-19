@@ -57,7 +57,7 @@ if(input.type === "text"){
 })
  console.log(name, email, password)
   if (name && email && password) {
-    const response = await fetch('/api/Users', {
+    const response = await fetch('/api/users', {
       method: 'POST',
       body: JSON.stringify({ name, email, password }),
       headers: { 'Content-Type': 'application/json' },
