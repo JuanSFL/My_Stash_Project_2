@@ -1,16 +1,17 @@
 const loginFormHandler = async (event) => {
+  console.log(event.target)
   event.preventDefault();
 
   // Collect values from the login form
-  const email = document.querySelector('#email-login').value.trim();
-  const password = document.querySelector('#password-login').value.trim();
-
+  const email = document.getElementById('#email-login').value.trim();
+  const password = document.getElementById('#password-login').value.trim();
+console.log(email,password)
   if (email && password) {
     // Send a POST request to the API endpoint
     const response = await fetch('/api/users/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/javascript' },
     });
 
     if (response.ok) {
@@ -23,26 +24,16 @@ const loginFormHandler = async (event) => {
 };
 
 const signupFormHandler = async (event) => {
+  console.log(event.target)
   event.preventDefault();
-console.log(event.target.children)
-  const inputs = document.querySelectorAll(".form-input")
- console.log(inputs)
-//  const formGroups = event.target.children.forEach((group,idx) =>{
-//   console.log(group,idx)
-//   return group[1]
-//  })
-//  console.log(formGroups)
-  // const name = document.querySelector('#name-signup').value.trim();
-  // const email = document.querySelector('#email-signup').value.trim();
-  // const password = document.querySelector('#password-signup').value.trim();
 
+  const inputs = document.querySelectorAll(".form-input")
+ 
   let name=""
   let email=""
   let password=""
 
 inputs.forEach((input,idx) =>{
-  console.log(input,idx)
-  console.log(input.type)
   if (input.type === "password"){
     password = input.value
   }
@@ -55,7 +46,7 @@ if(input.type === "text"){
 }
   
 })
- console.log(name, email, password)
+
   if (name && email && password) {
     const response = await fetch('/api/users', {
       method: 'POST',
@@ -72,3 +63,8 @@ if(input.type === "text"){
 };
 
 
+const signButton = document.getElementById('#signButton')
+const loginButton = document.getElementById('#loginButton')
+
+signButton.addEventListener('submit', signupFormHandler)
+loginButton.addEventListener('submit', loginFormHandler)
