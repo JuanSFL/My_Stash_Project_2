@@ -8,12 +8,12 @@ router.get('/', async (req, res) => {
     // Get all products and JOIN with user data
     const productData = await Product.findAll({
       
-      // include: [ ////user_id: req.session.user_id
-      //   {
-      //     model: User,
-      //     attributes: ['name'],
-      //   },
-      // ],
+      include: [ ////user_id: req.session.user_id
+        {
+          model: User,
+          attributes: ['name'],
+        },
+      ],
     });
     console.log(productData)
     console.log("==================")
@@ -24,8 +24,8 @@ router.get('/', async (req, res) => {
 
     // Pass serialized data and session flag into template
     res.render('homepage', { 
-      products: productsSerialized
-      // logged_in: req.session.logged_in 
+      products: productsSerialized,
+      logged_in: req.session.logged_in 
     });
   } catch (err) {
     res.status(500).json(err);
@@ -33,7 +33,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/product/:id', async (req, res) => {
-  if (!req.session.loggedIn) {
+  if (!req.session.logged_in) {
     res.redirect('/login');
   } else {
     try {
@@ -69,7 +69,7 @@ router.get('/product/:id', async (req, res) => {
 });
 
 router.get('/history/:id', async (req, res) => {
-  if (!req.session.loggedIn) {
+  if (!req.session.logged_in) {
     res.redirect('/login');
   } else {
     try {
@@ -106,14 +106,14 @@ router.get('/profile', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: product }],
-    });
+     attributes: { exclude: ['password'] },
+     include: [{ model: Product }],
+   });
 
     const user = userData.get({ plain: true });
 
     res.render('profile', {
-      user:[...user],
+      ...user,
       logged_in: true
     });
   } catch (err) {
@@ -127,7 +127,6 @@ router.get('/login', (req, res) => {
     res.redirect('/profile');
     return;
   }
-
   res.render('login');
 });
 
