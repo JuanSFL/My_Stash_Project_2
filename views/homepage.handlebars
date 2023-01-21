@@ -1,3 +1,7 @@
+  <h2>Welcome to Stash! Your one stop shop for all your favorite collectibles.</h2>
+
+      <h2>Browse products here:</h2>
+
 <!-- Loop over each object in the products array -->
 {{#each products as |product| }}
 <div class="row mb-4 product">
@@ -8,16 +12,17 @@
       <a href="/product/{{product.id}}">{{product.product_name}}</a>
     </h2>
     <p>
+        Price:
       <span for="img" aria-label="money">💲</span>
       <!-- Pass needed_funding value to the helper function -->
       <span class="dollar-amount">{{product.price}}</span>
-      needed!
+      
     </p>
-    <p>Created by {{product.user.name}} </p>
+    <p>Created by {{product.user.name}} </p></a>
   </div>
   <div class="col-md-7">
     <p>
-      {{product.description}}
+    {{product.description}}
     </p>
   </div>
 </div>

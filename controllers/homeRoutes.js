@@ -32,39 +32,55 @@ router.get('/', async (req, res) => {
   }
 });
 
+// router.get('/product/:id', async (req, res) => {
+//   if (!req.session.logged_in) {
+//     res.redirect('/login');
+//   } else {
+//     try {
+//       const productData = await Product.findOne({ user_id: req.session.user_id, id: req.params.id}, {
+//         include: [
+//           {
+//             model: Product,
+//             attributes: [
+//               'id',
+//               'product_name',
+//               'description',
+//               'price',
+//               'user_id',
+//             ],
+//           },
+//         ],
+//       });
+      
+//       const product = productData.get({ plain: true });
+
+//       res.render('product', {
+//         ...product,
+//         logged_in: req.session.logged_in
+//       });
+//     } catch (err) {
+//       res.status(500).json(err);
+//     }
+//   }
+// });
+
 router.get('/product/:id', async (req, res) => {
-  if (!req.session.logged_in) {
-    res.redirect('/login');
-  } else {
-    try {
-      const productData = await Product.findOne({ user_id: req.session.user_id, id: req.params.id}, {
-        include: [
-          {
-            model: Product,
-            attributes: [
-              'id',
-              'type',
-              'brand',
-              'name',
-              'description',
-              'condition',
-              'color',
-              'price',
-              'user_id',
-            ],
-          },
-        ],
-      });
-
-      const product = productData.get({ plain: true });
-
-      res.render('product', {
-        ...product,
-        logged_in: req.session.logged_in
-      });
-    } catch (err) {
-      res.status(500).json(err);
-    }
+  try {
+    const productData = await Product.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+      ],
+    });
+    const product = productData.get({ plain: true });
+    res.render('product', {
+      ...product,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 

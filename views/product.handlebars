@@ -1,13 +1,14 @@
 <div class="text-center">
-  <h2>{{name}}</h2>
+  <h2>{{product_name}}</h2>
   <p>{{description}}</p>
-  <p>Created by {{user.name}} on {{ date_created}}</p>
+
   <p>
+    Price:
     <span for="img" aria-label="money">💲</span>
-    <span class="dollar-amount">{{ price}}</span>
-    needed
+    <span class="dollar-amount">{{price}}</span>
+    
   </p>
   <p>
-    <button class="btn btn-primary">Fund this Project!</button>
+    <button class="btn btn-primary">Buy This Item!</button>
   </p>
 </div>
