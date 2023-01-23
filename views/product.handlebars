@@ -1,14 +1,29 @@
-<div class="text-center">
-  <h2>{{product_name}}</h2>
-  <p>{{description}}</p>
+<!-- component -->
+<section class="text-gray-700 body-font overflow-hidden bg-white">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="lg:w-4/5 mx-auto flex flex-wrap">
+      <img id="img" alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src="/assets/{{type}}/{{brand}}.jpg">
+      <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+        <h1 id="product_name" class="text-gray-900 text-3xl title-font font-medium mb-1">{{product_name}}</h1>
+        <div class="flex mb-4">
+          <span class="flex">
+            <span id="brand" class="text-gray-600">{{brand}}</span>
+          </span>
+        </div>
+        <p id="description" class="text-black leading-relaxed">{{description}}</p>
+        <div class="block mt-6 pb-5 border-b-2 border-gray-200 mb-5">
 
-  <p>
-    Price:
-    <span for="img" aria-label="money">💲</span>
-    <span class="dollar-amount">{{price}}</span>
-    
-  </p>
-  <p>
-    <button class="btn btn-primary">Buy This Item!</button>
-  </p>
-</div>
+          <p id="condition" class="text-gray-600 text-sm mr-3">Condition: {{condition}}</p>
+          <p id="color" class="text-gray-600 text-sm mr-3">Color: {{color}}</p>
+
+        </div>
+        <div class="flex">
+          <span id="price" class="title-font font-medium text-2xl text-gray-900" value="{{price}}">${{price}}</span>
+          <button id="addCart" class="flex ml-auto text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-gray-800 rounded" value="{{id}}"><a href="/cart">Add to cart</a></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="/js/product.js"></script>

@@ -1,11 +1,11 @@
-console.log("hello")
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
   // Collect values from the login form
-  const email = document.getElementById('email-login').value.trim();
-  const password = document.getElementById('password-login').value.trim();
-console.log(email,password)
+  const email = document.querySelector('#email-login').value.trim();
+  console.log(email);
+  const password = document.querySelector('#password-login').value.trim();
+
   if (email && password) {
     // Send a POST request to the API endpoint
     const response = await fetch('/api/users/login', {
@@ -13,16 +13,16 @@ console.log(email,password)
       body: JSON.stringify({ email, password }),
       headers: { 'Content-Type': 'application/json' },
     });
-    console.log(response.ok)
+
     if (response.ok) {
       // If successful, redirect the browser to the profile page
-       document.location.replace('/profile');
+      document.location.replace('/dashboard');
     } else {
       alert(response.statusText);
     }
   }
 };
 
-const loginButton = document.getElementById('loginButton')
-console.log(loginButton)
-loginButton.addEventListener('click', loginFormHandler)
+const loginButton = document.querySelector('#loginButton');
+
+loginButton.addEventListener('click', loginFormHandler);

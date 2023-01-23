@@ -4,42 +4,123 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Stash!</title>
-  <link rel="stylesheet"  href="/css/jass.css">
-  <link rel="stylesheet"  href="/css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css" integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Stashhouse</title>
+  <link rel="stylesheet" href="/css/jass.css">
+  <link rel="stylesheet" href="/css/style.css">
+  {{!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"> --}}
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"
+    integrity="sha256-XF29CBwU1MWLaGEnsELogU6Y6rcc5nCkhhx89nFMIDQ=" crossorigin="anonymous"></script>
+
+  <style>
+    .bg-black-alt {
+      background: #191919;
+    }
+
+    .text-black-alt {
+      color: #191919;
+    }
+
+    .border-black-alt {
+      border-color: #191919;
+    }
+  </style>
+
+  <nav id="header" class="bg-gray-900 fixed w-full z-10 top-0 shadow">
+
+
+    <div class="w-full container mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3 md:pb-0">
+
+      <div class="w-1/2 pl-2 md:pl-0">
+        <a class="text-gray-100 text-base xl:text-xl no-underline hover:no-underline font-bold" href="/">
+          stashHouse
+        </a>
+      </div>
+      <div class="w-1/2 pr-0">
+        <div class="flex relative inline-block float-right">
+          
+          <div class="relative text-sm text-gray-100">
+            {{#if logged_in}}
+            <button id="userButton" class="flex items-center focus:outline-none mr-3">
+              <img class="w-8 h-8 rounded-full mr-4" src="http://i.pravatar.cc/300" alt="Avatar of User"> <span
+                class="hidden md:inline-block text-gray-100">Hi, {{name}}</span>
+              <svg class="pl-2 h-2 fill-current text-gray-100" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 129 129" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129">
+                <g>
+                  <path
+                    d="m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z" />
+                </g>
+              </svg>
+            </button>
+            <div id="userMenu"
+              class="bg-gray-900 rounded shadow-md mt-2 absolute mt-12 top-0 right-0 min-w-full overflow-auto z-30 invisible">
+              <ul class="list-reset">
+                <li><a href="/dashboard"
+                    class="px-4 py-2 block text-gray-100 hover:bg-gray-800 no-underline hover:no-underline">Dashboard</a>
+                  </li>
+                <li><a href="#"
+                    class="px-4 py-2 block text-gray-100 hover:bg-gray-800 no-underline hover:no-underline">My Profile</a>
+                </li>
+                <li>
+                  <hr class="border-t mx-2 border-gray-400">
+                </li>
+                <li><a
+                    class="px-4 py-2 block text-gray-100 hover:bg-gray-800 no-underline hover:no-underline">Logout</a>
+                </li>
+              </ul>
+            </div>
+            {{else}}
+            <a href="/login">Log In</a>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
 </head>
 
-<body>
-  <div class="flex-column justify-space-around">
-    <header class="display-flex justify-space-between align-center p-2">
-      <h1>
-        <a href="/">My Stash!</a>
-      </h1>
-      <nav>
-        <!-- Conditionally render login or logout links -->
-        {{#if logged_in}}
-        <a href="/profile">profile</a> |
-        <button class="no-button" id="logout">logout</button>
-        {{else}}
-        <a href="/login">login</a>
-        {{/if}}
-      </nav>
-    </header>
-    <main class="container container-fluid mt-5">
-      <!-- Render the sub layout -->
-      {{{ body }}}
-    </main>
-    <footer>
-      
-    </footer>
-  </div>
-
-  <!-- Render script for logged in users only -->
-  {{#if logged_in}}
-  <script src="/js/logout.js"></script>
-  {{/if}}
+<body class="bg-black-alt font-sans leading-normal tracking-normal">
+  {{{ body }}}
 </body>
 
+{{!-- <footer class="bg-gray-900 border-t border-gray-400 shadow">
+  <div class="container max-w-md mx-auto flex py-8">
+
+    <div class="w-full mx-auto flex flex-wrap">
+      <div class="flex w-full md:w-1/2 ">
+        <div class="px-8">
+          <h3 class="font-bold font-bold text-gray-100">About</h3>
+          <p class="py-4 text-gray-600 text-sm">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel mi ut felis tempus commodo nec id
+            erat. Suspendisse consectetur dapibus velit ut lacinia.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex w-full md:w-1/2">
+        <div class="px-8">
+          <h3 class="font-bold font-bold text-gray-100">Social</h3>
+          <ul class="list-reset items-center text-sm pt-3">
+            <li>
+              <a class="inline-block text-gray-600 no-underline hover:text-gray-100 hover:text-underline py-1"
+                href="#">Add social link</a>
+            </li>
+            <li>
+              <a class="inline-block text-gray-600 no-underline hover:text-gray-100 hover:text-underline py-1"
+                href="#">Add social link</a>
+            </li>
+            <li>
+              <a class="inline-block text-gray-600 no-underline hover:text-gray-100 hover:text-underline py-1"
+                href="#">Add social link</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer> --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/js/dashboard.js"
 </html>

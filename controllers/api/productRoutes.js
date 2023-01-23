@@ -1,38 +1,69 @@
 const router = require('express').Router();
-const { Product } = require('../../models');
-const withAuth = require('../../utils/auth');
+const { Product, History } = require('../../models');
 
-router.post('/', withAuth, async (req, res) => {
-  try {
-    const newProduct = await Product.create({
-      ...req.body,
-      user_id: req.session.user_id,
-    });
-
-    res.status(200).json(newProduct);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
-router.delete('/:id', withAuth, async (req, res) => {
-  try {
-    const ProductData = await Product.destroy({
-      where: {
-        id: req.params.id,
-        user_id: req.session.user_id,
-      },
-    });
-
-    if (!ProductData) {
-      res.status(404).json({ message: 'No Product found with this id!' });
-      return;
+router.post('/', async (req, res) => {
+    try {
+      const dbProductData = await Product.create({
+        type: req.body.type,
+        brand: req.body.brand,
+        product_name: req.body.product_name,
+        description: req.body.description,
+        condition: req.body.condition,
+        color: req.body.color,
+        price: req.body.price,
+        user_id: req.session.user_id
+      });
+  
+      req.session.save(() => {
+        req.session.loggedIn = true;
+  
+        res.status(200).json(dbProductData);
+      });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
     }
+  });
 
-    res.status(200).json(ProductData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+  router.post('/history', async (req, res) => {
+    try {
+      const dbHistoryData = await History.create({
+        date: req.body.date,
+        itemListed: req.body.itemListed,
+        itemSold: req.body.itemSold,
+        itemPurchased: req.body.itemPurchased,
+        user_id: req.session.user_id
+      });
+  
+      req.session.save(() => {
+        req.session.loggedIn = true;
+  
+        res.status(200).json(dbHistoryData);
+      });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  });
 
-module.exports = router;
+  router.delete('/:id', async (req, res) => {
+    try {
+      const productData = await Product.destroy({
+        where: {
+          id: req.params.id,
+          user_id: req.session.user_id,
+        },
+      });
+  
+      if (!productData) {
+        res.status(404).json({ message: 'No product found with this id!' });
+        return;
+      }
+  
+      res.status(200).json(productData);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
+
+  module.exports = router;
