@@ -16,18 +16,15 @@ History.init(
       allowNull: false,
     },
     itemListed: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.BOOLEAN,
     },
     itemSold: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.BOOLEAN,
     },
     itemPurchased: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.BOOLEAN,
     },
-    user_id: {
+    product_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'user',

@@ -11,14 +11,14 @@ Product.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    // type: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false,
-    // },
-    // brand: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false,
-    // },
+    type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    brand: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     product_name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -27,14 +27,14 @@ Product.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // condition: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false,
-    // },
-    // color: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false,
-    // },
+    condition: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    color: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     price: {
       type: DataTypes.DECIMAL(10,2),
       allowNull: false,

@@ -1,0 +1,12 @@
+[
+  {
+    "type":"shoes",
+    "brand":"nike",
+    "product_name": "Air Force One",
+    "description": "A classic shoe for any occassion .",
+    "condition":"10/10",
+    "color":"blue",
+    "price": 800,
+    "user_id":"1"
+  }
+]

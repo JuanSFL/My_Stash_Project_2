@@ -1,24 +1,23 @@
 const newFormHandler = async (event) => {
   event.preventDefault();
-console.log('click')
-  const product_name = document.querySelector('#product-name').value.trim();
-  const price = document.querySelector('#product-price').value.trim();
-  const description = document.querySelector('#product-desc').value.trim();
 
-  if (product_name && price && description) {
-    const response = await fetch(`/api/products`, {
+  const name = document.querySelector('#project-name').value.trim();
+  const needed_funding = document.querySelector('#project-funding').value.trim();
+  const description = document.querySelector('#project-desc').value.trim();
+
+  if (name && needed_funding && description) {
+    const response = await fetch(`/api/projects`, {
       method: 'POST',
-      body: JSON.stringify({ product_name, price, description }),
+      body: JSON.stringify({ name, needed_funding, description }),
       headers: {
         'Content-Type': 'application/json',
       },
     });
 
     if (response.ok) {
-      console.log(response)
       document.location.replace('/profile');
     } else {
-      alert('Failed to create product');
+      alert('Failed to create project');
     }
   }
 };
@@ -27,22 +26,22 @@ const delButtonHandler = async (event) => {
   if (event.target.hasAttribute('data-id')) {
     const id = event.target.getAttribute('data-id');
 
-    const response = await fetch(`/api/products/${id}`, {
+    const response = await fetch(`/api/projects/${id}`, {
       method: 'DELETE',
     });
 
     if (response.ok) {
       document.location.replace('/profile');
     } else {
-      alert('Failed to delete product');
+      alert('Failed to delete project');
     }
   }
 };
 
 document
-  .querySelector('.new-product-form')
+  .querySelector('.new-project-form')
   .addEventListener('submit', newFormHandler);
 
 document
-  .querySelector('.product-list')
+  .querySelector('.project-list')
   .addEventListener('click', delButtonHandler);
