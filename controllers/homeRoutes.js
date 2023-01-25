@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Product, User, History } = require('../models');
+const { Product, User, History, Cart } = require('../models');
 
 const withAuth = require('../utils/auth');
 
@@ -17,6 +17,7 @@ router.get('/', async (req, res) => {
 
     // Serialize data so the template can read it
     const products = productData.map((product) => product.get({ plain: true }));
+    console.log(products)
     
     // const userData = await User.findByPk(req.session.user_id, {
     //   attributes: { exclude: ['password'] },
@@ -27,8 +28,7 @@ router.get('/', async (req, res) => {
     // Pass serialized data and session flag into template
     res.render('homepage', { 
       products, 
-      // ...user,
-      logged_in: req.session.logged_in 
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);
@@ -50,6 +50,37 @@ router.get('/product/:id', async (req, res) => {
 
     res.render('product', {
       ...product,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/history', async (req, res) => {
+  try {
+    // Get all projects and JOIN with user data
+    const historyData = await History.findAll({
+      include: [
+        {
+          model: Product,
+        },
+      ],
+    });
+
+    // Serialize data so the template can read it
+    const histories = historyData.map((history) => history.get({ plain: true }));
+    console.log(histories)
+    
+    // const userData = await User.findByPk(req.session.user_id, {
+    //   attributes: { exclude: ['password'] },
+    // });
+
+    // const user = userData.get({ plain: true });
+
+    // Pass serialized data and session flag into template
+    res.render('dashboard', { 
+      histories, 
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -118,6 +149,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
       include: [{ model: Product }],
     });
 
+    console.log(req.session)
     const user = userData.get({ plain: true });
     console.log(user);
 
@@ -133,6 +165,13 @@ router.get('/dashboard', withAuth, async (req, res) => {
 router.get('/cart', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
+    const cartData = await Cart.findAll({
+      include: [{ model: User }],
+    });
+
+    const carts = cartData.map((cart) => cart.get({ plain: true }));
+    console.log(carts);
+
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
       include: [{ model: Product }],
@@ -142,6 +181,7 @@ router.get('/cart', withAuth, async (req, res) => {
     console.log(user);
 
     res.render('cart', {
+      carts,
       ...user,
       logged_in: true
     });

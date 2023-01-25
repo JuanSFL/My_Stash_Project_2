@@ -1,32 +1,78 @@
 const cartList = document.querySelector('#cartList');
 
-if (localStorage.getItem('cart')) {
-    const cart = JSON.parse(localStorage.getItem('cart'));
-    console.log(cart);
-
-    for (let i = 0; i < cart.length; i++) {
-        console.log(cart[i]);
-        
-        cartList.prepend(`
-        <div class="rounded-lg md:w-2/3">
-            <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-                <img src="${cart[i].src}" alt="product-image" class="w-full rounded-lg sm:w-40" />
-                <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
-                    <div class="mt-5 sm:mt-0">
-                        <h2 class="text-lg font-bold text-gray-900">${cart[i].name}</h2>
-                        <p class="mt-1 text-xs text-gray-700">${cart[i].description}</p>
-                    </div>
-                    <div class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
-                        <div class="flex items-center space-x-4">
-                            <p class="text-sm text-black">${cart[i].price}</p>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 cursor-pointer duration-150 hover:text-red-500">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        `);
-    };
+const delButtonHandler = async (event) => {
+    if (event.target.hasAttribute('data-id')) {
+      const id = event.target.getAttribute('data-id');
+  
+      const response = await fetch(`/api/cart/${id}`, {
+        method: 'DELETE',
+      });
+  
+      if (response.ok) {
+        document.location.replace('/cart');
+      } else {
+        alert('Failed to delete product');
+      }
+    }
 };
+
+cartList.addEventListener('click', delButtonHandler);
+
+let subtotal = []
+
+
+$.get('/api/cart').then(function(cartResponse){
+  console.log(cartResponse)
+
+  $.each(cartResponse, function (i) {
+    const price = cartResponse[i].price;
+    console.log(price);
+    subtotal = Number(subtotal) + Number(price);
+    console.log(subtotal)
+  });
+  
+  console.log(subtotal);
+  const subtotalPrice = document.querySelector('#subtotal');
+  subtotalPrice.textContent = subtotal.toFixed(2);
+
+  const tax = subtotal * 0.06;
+  const taxPrice = document.querySelector('#tax');
+  taxPrice.textContent = tax.toFixed(2);
+
+  const total = Number(subtotal) + Number(tax);
+  const totalPrice = document.querySelector('#total');
+  totalPrice.textContent = total.toFixed(2);
+});
+
+const addBoughtHistory = async () => {
+  const product_id = document.querySelector('#product_name').getAttribute('data-id');
+  const date = new Date();
+  const itemPurchased = true;
+
+  console.log(product_id)
+
+  let response = await fetch(`/api/products/history`, {
+      method: 'POST',
+      body: JSON.stringify({ date, product_id, itemPurchased }),
+      headers: {
+          'Content-Type': 'application/json',
+      },
+  });
+
+  if (response.ok) {
+    let response = await fetch(`/api/cart`, {
+      method: 'DELETE',
+      body: JSON.stringify({product_id}),
+    });
+    
+    if (response.ok) {
+      document.location.replace('/dashboard');
+    } else {
+      console.log('Failed to delete cart');
+    }
+  } else {
+      console.log('Failed to create history');
+  };
+};
+
+document.querySelector('#checkoutBtn').addEventListener('click', addBoughtHistory);

@@ -10,49 +10,106 @@
   }
 </style>
 
-  <div class="h-screen bg-gray-100 pt-20">
-    <h1 class="mb-10 text-center text-2xl font-bold text-black">Cart Items</h1>
-    <div class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
-    
-      <div id="cartList" class="rounded-lg md:w-2/3">
-        <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-          <img src="https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="product-image" class="w-full rounded-lg sm:w-40" />
-          <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
-            <div class="mt-5 sm:mt-0">
-              <h2 class="text-lg font-bold text-gray-900">Nike Air Max 2019</h2>
-              <p class="mt-1 text-xs text-gray-700">36EU - 4US</p>
+<nav id="header" class="bg-gray-900 fixed w-full z-10 top-0 shadow">
+
+
+    <div class="w-full container mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3 md:pb-0">
+
+      <div class="w-1/2 pl-2 md:pl-0">
+        <a class="text-gray-100 text-base xl:text-xl no-underline hover:no-underline font-bold" href="/">
+          stashHouse
+        </a>
+      </div>
+      <div class="w-1/2 pr-0">
+        <div class="flex relative inline-block float-right">
+          
+          <div class="relative text-sm text-gray-100">
+            {{#if logged_in}}
+            <button id="userButton" class="flex items-center focus:outline-none mr-3">
+              <a href="/dashboard"
+                    class="px-4 py-2 block text-gray-100 hover:bg-gray-800 no-underline hover:no-underline">Dashboard</a>
+                    <a href="/cart"
+                    class="px-4 py-2 block text-gray-100 hover:bg-gray-800 no-underline hover:no-underline">Cart</a>
+              <a href="/api/users/logout"
+                    class="px-4 py-2 block text-gray-100 hover:bg-gray-800 no-underline hover:no-underline">Logout</a>
+            </button>
+            <div id="userMenu"
+              class="bg-gray-900 rounded shadow-md mt-2 absolute mt-12 top-0 right-0 min-w-full overflow-auto z-30 invisible">
+              <ul class="list-reset">
+                <li><a href="/dashboard"
+                    class="px-4 py-2 block text-gray-100 hover:bg-gray-800 no-underline hover:no-underline">Dashboard</a>
+                  </li>
+                <li><a href="#"
+                    class="px-4 py-2 block text-gray-100 hover:bg-gray-800 no-underline hover:no-underline">My Profile</a>
+                </li>
+                <li>
+                  <hr class="border-t mx-2 border-gray-400">
+                </li>
+                <li><a
+                    class="px-4 py-2 block text-gray-100 hover:bg-gray-800 no-underline hover:no-underline">Logout</a>
+                </li>
+              </ul>
             </div>
-            <div class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
-              <div class="flex items-center space-x-4">
-                <p class="text-sm text-black">259.000 ₭</p>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 cursor-pointer duration-150 hover:text-red-500">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </div>
-            </div>
+            {{else}}
+            <a href="/login">Log In</a>
+            {{/if}}
           </div>
         </div>
       </div>
+    </div>
+  </nav>
+
+  <div class="h-screen bg-gray-100 pt-20">
+    <h1 class="mb-10 text-center text-2xl font-bold text-black">Cart Items</h1>
+    <div class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
+      <div id="cartList" class="rounded-lg md:w-2/3">
+        {{#if carts.length}}
+        {{#each carts as |cart|}}
+        <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
+                <img src="{{{cart.src}}}" alt="product-image" class="w-full rounded-lg sm:w-40" />
+                <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
+                    <div class="mt-5 sm:mt-0">
+                        <h2 id="product_name" class="text-lg font-bold text-gray-900" data-id="{{cart.product_id}}"><a href="/product/{{cart.product_id}}">{{cart.product_name}}</h2>
+                        <p class="mt-1 text-xs text-gray-700">{{cart.description}}</p>
+                    </div>
+                    <div class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
+                        <div class="flex items-center space-x-4">
+                            <p class="text-sm text-black">$<a id="product_price">{{cart.price}}</a></p>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 cursor-pointer duration-150 hover:text-red-500">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                            <a class="text-black" data-id="{{cart.id}}">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        {{/if}}
+      </div>
       <!-- Sub total -->
+      {{#if carts.length}}
       <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
         <div class="mb-2 flex justify-between">
           <p class="text-gray-700">Subtotal</p>
-          <p class="text-gray-700">$129.99</p>
+          <p class="text-gray-700">$<a id="subtotal"></a></p>
         </div>
         <div class="flex justify-between">
-          <p class="text-gray-700">Shipping</p>
-          <p class="text-gray-700">$4.99</p>
+          <p class="text-gray-700">Tax</p>
+          <p class="text-gray-700">$<a id="tax"></a></p>
         </div>
         <hr class="my-4" />
         <div class="flex justify-between">
           <p class="text-lg font-bold text-black">Total</p>
           <div class="">
-            <p class="mb-1 text-lg font-bold text-black">$134.98 USD</p>
+            <p class="mb-1 text-lg font-bold text-black">$<a id="total"></a></p>
           </div>
         </div>
-        <button class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check out</button>
+        <button id="checkoutBtn" class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600"><a href="/history">Check out</a></button>
       </div>
+      {{else}}
+      {{/if}}
     </div>
   </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="/js/cart.js"></script>

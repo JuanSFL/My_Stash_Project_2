@@ -27,18 +27,21 @@ router.post('/', async (req, res) => {
 
   router.post('/history', async (req, res) => {
     try {
-      const dbHistoryData = await History.create({
+      const historyData = await History.create({
         date: req.body.date,
+        product_id: req.body.product_id,
         itemListed: req.body.itemListed,
         itemSold: req.body.itemSold,
         itemPurchased: req.body.itemPurchased,
         user_id: req.session.user_id
       });
-  
+      
+      console.log(historyData);
+      
       req.session.save(() => {
         req.session.loggedIn = true;
   
-        res.status(200).json(dbHistoryData);
+        res.status(200).json(historyData);
       });
     } catch (err) {
       console.log(err);

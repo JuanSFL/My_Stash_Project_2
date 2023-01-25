@@ -11,25 +11,23 @@
 
             <div class="w-1/2 pl-2 md:pl-0">
                 <a class="text-gray-100 text-base xl:text-xl no-underline hover:no-underline font-bold" href="/">
-                    <span role="img" aria-label="money">💸</span> My Stash!
+                    <span class="hidden md:inline-block text-gray-100">Hi, {{name}}</span>
                 </a>
             </div>
             <div class="w-1/2 pr-0">
                 <div class="flex relative inline-block float-right">
 
                     <div class="relative text-sm text-gray-100">
-                        <button id="userButton" class="flex items-center focus:outline-none mr-3">
-                            <img class="w-8 h-8 rounded-full mr-4" src="http://i.pravatar.cc/300" alt="Avatar of User">
-                            <span class="hidden md:inline-block text-gray-100">Hi, {{name}}</span>
-                            <svg class="pl-2 h-2 fill-current text-gray-100" version="1.1"
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129"
-                                xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129">
-                                <g>
-                                    <path
-                                        d="m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z" />
-                                </g>
-                            </svg>
-                        </button>
+                        <div id="userButton" class="flex items-center focus:outline-none mr-3">
+                            <a href="/"
+                                class="px-4 py-2 block text-gray-100 hover:bg-gray-800 no-underline hover:no-underline">Store</a>
+                            <a href="/cart"
+                                class="px-4 py-2 block text-gray-100 hover:bg-gray-800 no-underline hover:no-underline">Cart</a>
+                            <a href="/api/users/logout"
+                                class="px-4 py-2 block text-gray-100 hover:bg-gray-800 no-underline hover:no-underline">Logout</a>
+
+
+                        </div>
                         <div id="userMenu"
                             class="bg-gray-900 rounded shadow-md mt-2 absolute mt-12 top-0 right-0 min-w-full overflow-auto z-30 invisible">
                             <ul class="list-reset">
@@ -173,233 +171,233 @@
 
                 <div class="flex flex-row flex-wrap flex-grow mt-2">
 
-                <div class="w-full md:w-1/2 xl:w-1/3 p-3">
-                    <!--Template Card-->
-                    <div class="bg-gray-900 border border-gray-800 rounded shadow">
-                        <div class="border-b border-gray-800 p-3">
-                            <h5 class="font-bold uppercase text-gray-600">Recently Bought</h5>
-                        </div>
-                        <div class="p-5">
+                    <div class="w-full md:w-1/2 xl:w-1/3 p-3">
+                        <!--Template Card-->
+                        <div class="bg-gray-900 border border-gray-800 rounded shadow">
+                            <div class="border-b border-gray-800 p-3">
+                                <h5 class="font-bold uppercase text-gray-600">Recently Bought</h5>
+                            </div>
+                            <div class="p-5">
 
+                            </div>
                         </div>
+                        <!--/Template Card-->
                     </div>
-                    <!--/Template Card-->
-                </div>
 
-                <div class="w-full md:w-1/2 xl:w-1/3 p-3">
-                    <!--Template Card-->
-                    <div class="bg-gray-900 border border-gray-800 rounded shadow">
-                        <div class="border-b border-gray-800 p-3">
-                            <h5 class="font-bold uppercase text-gray-600">Recently Sold</h5>
-                        </div>
-                        <div class="p-5">
+                    <div class="w-full md:w-1/2 xl:w-1/3 p-3">
+                        <!--Template Card-->
+                        <div class="bg-gray-900 border border-gray-800 rounded shadow">
+                            <div class="border-b border-gray-800 p-3">
+                                <h5 class="font-bold uppercase text-gray-600">Recently Sold</h5>
+                            </div>
+                            <div class="p-5">
 
+                            </div>
                         </div>
+                        <!--/Template Card-->
                     </div>
-                    <!--/Template Card-->
                 </div>
-            </div>
 
                 <!--Divider-->
                 <hr class="border-b-2 border-gray-600 my-8 mx-4">
-            <div class="w-full md:w-1/2 xl:w-1/3">
-                <div class="bg-gray-900 border border-gray-800 rounded shadow">
-                    <div class="border-b border-gray-800 p-3">
-                        <h5 class="font-bold uppercase text-gray-600">Quick Action</h5>
-                    </div>
-                    <div class="p-5">
-                        <a class="modal-open bg-transparent text-gray-600">List New Item</a>
+                <div class="w-full md:w-1/2 xl:w-1/3">
+                    <div class="bg-gray-900 border border-gray-800 rounded shadow">
+                        <div class="border-b border-gray-800 p-3">
+                            <h5 class="font-bold uppercase text-gray-600">Quick Action</h5>
+                        </div>
+                        <div class="p-5">
+                            <a class="modal-open bg-transparent text-gray-600">List New Item</a>
 
 
-                        <!--Modal-->
-                        <div
-                            class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
-                            <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
-
+                            <!--Modal-->
                             <div
-                                class="modal-container bg-black w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+                                class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+                                <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
                                 <div
-                                    class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
-                                    <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18"
-                                        height="18" viewBox="0 0 18 18">
-                                        <path
-                                            d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
-                                        </path>
-                                    </svg>
-                                    <span class="text-sm">(Esc)</span>
-                                </div>
+                                    class="modal-container bg-black w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
 
-                                <!-- Add margin if you want to see some of the overlay behind the modal-->
-                                <div class="modal-content py-4 text-left px-6">
-                                    <!--Title-->
-                                    <div class="flex justify-between items-center pb-3">
-                                        <p class="text-2xl font-bold">List Product</p>
-                                        <div class="modal-close cursor-pointer z-50">
-                                            <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg"
-                                                width="18" height="18" viewBox="0 0 18 18">
-                                                <path
-                                                    d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
-                                                </path>
-                                            </svg>
-                                        </div>
+                                    <div
+                                        class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+                                        <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg"
+                                            width="18" height="18" viewBox="0 0 18 18">
+                                            <path
+                                                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+                                            </path>
+                                        </svg>
+                                        <span class="text-sm">(Esc)</span>
                                     </div>
 
-                                    <!--Body md:w-1/2-->
-                                    <form class="w-full max-w-lg">
-                                        <div class="flex flex-wrap -mx-3 mb-6">
-                                            <div class="w-full px-3 mb-6 md:mb-0">
-                                                <label
-                                                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                                    for="grid-name">
-                                                    Name
-                                                </label>
-                                                <input
-                                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                                    id="grid-name" type="text" placeholder="Airforce One">
-                                            </div>
-                                            <div class="w-full px-3">
-                                                <label
-                                                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                                    for="grid-description">
-                                                    Description
-                                                </label>
-                                                <input
-                                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                                    id="grid-description" type="text"
-                                                    placeholder="The coolest shoes of 2008!">
+                                    <!-- Add margin if you want to see some of the overlay behind the modal-->
+                                    <div class="modal-content py-4 text-left px-6">
+                                        <!--Title-->
+                                        <div class="flex justify-between items-center pb-3">
+                                            <p class="text-2xl font-bold">List Product</p>
+                                            <div class="modal-close cursor-pointer z-50">
+                                                <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg"
+                                                    width="18" height="18" viewBox="0 0 18 18">
+                                                    <path
+                                                        d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+                                                    </path>
+                                                </svg>
                                             </div>
                                         </div>
 
-                                        <div class="flex flex-wrap -mx-3 mb-2">
-                                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                                <label
-                                                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                                    for="grid-type">
-                                                    Type
-                                                </label>
-                                                <div class="relative">
-                                                    <select
-                                                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                        id="grid-type">
-                                                        <option value="" selected disabled hidden>Select...</option>
-                                                        <option>Shoes</option>
-                                                        <option>TradingCards</option>
-                                                    </select>
-                                                    <div
-                                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                                        <svg class="fill-current h-4 w-4"
-                                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                                            <path
-                                                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                                        </svg>
+                                        <!--Body md:w-1/2-->
+                                        <form class="w-full max-w-lg">
+                                            <div class="flex flex-wrap -mx-3 mb-6">
+                                                <div class="w-full px-3 mb-6 md:mb-0">
+                                                    <label
+                                                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                                        for="grid-name">
+                                                        Name
+                                                    </label>
+                                                    <input
+                                                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                                        id="grid-name" type="text" placeholder="Airforce One">
+                                                </div>
+                                                <div class="w-full px-3">
+                                                    <label
+                                                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                                        for="grid-description">
+                                                        Description
+                                                    </label>
+                                                    <input
+                                                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                                        id="grid-description" type="text"
+                                                        placeholder="The coolest shoes of 2008!">
+                                                </div>
+                                            </div>
+
+                                            <div class="flex flex-wrap -mx-3 mb-2">
+                                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                                    <label
+                                                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                                        for="grid-type">
+                                                        Type
+                                                    </label>
+                                                    <div class="relative">
+                                                        <select
+                                                            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                            id="grid-type">
+                                                            <option value="" selected disabled hidden>Select...</option>
+                                                            <option>Shoes</option>
+                                                            <option>TradingCards</option>
+                                                        </select>
+                                                        <div
+                                                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                            <svg class="fill-current h-4 w-4"
+                                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                                <path
+                                                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                                    <label
+                                                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                                        for="grid-color">
+                                                        Color
+                                                    </label>
+                                                    <div class="relative">
+                                                        <select
+                                                            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                            id="grid-color">
+                                                            <option value="" selected disabled hidden>Select...</option>
+                                                            <option>Black</option>
+                                                            <option>White</option>
+                                                            <option>Red</option>
+                                                            <option>Pink</option>
+                                                            <option>Orange</option>
+                                                            <option>Yellow</option>
+                                                            <option>Gold</option>
+                                                            <option>Green</option>
+                                                            <option>Blue</option>
+                                                            <option>Teal</option>
+                                                            <option>Purple</option>
+                                                            <option>Silver</option>
+                                                            <option>Multi</option>
+                                                            <option>N/A</option>
+                                                        </select>
+                                                        <div
+                                                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                            <svg class="fill-current h-4 w-4"
+                                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                                <path
+                                                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                                    <label
+                                                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                                        for="grid-condition">
+                                                        Condition
+                                                    </label>
+                                                    <div class="relative">
+                                                        <select
+                                                            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                            id="grid-condition">
+                                                            <option value="" selected disabled hidden>Select...</option>
+                                                            <option>Mint</option>
+                                                            <option>Like New</option>
+                                                            <option>Very Good</option>
+                                                            <option>Good</option>
+                                                            <option>Used</option>
+                                                        </select>
+                                                        <div
+                                                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                            <svg class="fill-current h-4 w-4"
+                                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                                <path
+                                                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                                            </svg>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                                <label
-                                                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                                    for="grid-color">
-                                                    Color
-                                                </label>
-                                                <div class="relative">
-                                                    <select
-                                                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                        id="grid-color">
-                                                        <option value="" selected disabled hidden>Select...</option>
-                                                        <option>Black</option>
-                                                        <option>White</option>
-                                                        <option>Red</option>
-                                                        <option>Pink</option>
-                                                        <option>Orange</option>
-                                                        <option>Yellow</option>
-                                                        <option>Gold</option>
-                                                        <option>Green</option>
-                                                        <option>Blue</option>
-                                                        <option>Teal</option>
-                                                        <option>Purple</option>
-                                                        <option>Silver</option>
-                                                        <option>Multi</option>
-                                                        <option>N/A</option>
-                                                    </select>
-                                                    <div
-                                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                                        <svg class="fill-current h-4 w-4"
-                                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                                            <path
-                                                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                                        </svg>
-                                                    </div>
+
+                                            <div class="flex flex-wrap -mx-3 mb-6">
+                                                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                                    <label
+                                                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                                        for="grid-brand">
+                                                        Brand
+                                                    </label>
+                                                    <input
+                                                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                                        id="grid-brand" type="text" placeholder="Nike">
+                                                </div>
+                                                <div class="w-full md:w-1/2 px-3">
+                                                    <label
+                                                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                                        for="grid-price">
+                                                        Price
+                                                    </label>
+                                                    <input
+                                                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                                        id="grid-price" type="text" placeholder="50.00">
                                                 </div>
                                             </div>
-                                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                                <label
-                                                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                                    for="grid-condition">
-                                                    Condition
-                                                </label>
-                                                <div class="relative">
-                                                    <select
-                                                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                        id="grid-condition">
-                                                        <option value="" selected disabled hidden>Select...</option>
-                                                        <option>Mint</option>
-                                                        <option>Like New</option>
-                                                        <option>Very Good</option>
-                                                        <option>Good</option>
-                                                        <option>Used</option>
-                                                    </select>
-                                                    <div
-                                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                                        <svg class="fill-current h-4 w-4"
-                                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                                            <path
-                                                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                                        </svg>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        </form>
+
+                                        <!--Footer-->
+                                        <div class="flex justify-end pt-2">
+                                            <button id="saveBtn"
+                                                class="modal-close px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">Save</button>
+                                            <button id="cancelBtn"
+                                                class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Cancel</button>
                                         </div>
 
-                                        <div class="flex flex-wrap -mx-3 mb-6">
-                                            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                                <label
-                                                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                                    for="grid-brand">
-                                                    Brand
-                                                </label>
-                                                <input
-                                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                                    id="grid-brand" type="text" placeholder="Nike">
-                                            </div>
-                                            <div class="w-full md:w-1/2 px-3">
-                                                <label
-                                                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                                    for="grid-price">
-                                                    Price
-                                                </label>
-                                                <input
-                                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                                    id="grid-price" type="text" placeholder="50.00">
-                                            </div>
-                                        </div>
-                                    </form>
-
-                                    <!--Footer-->
-                                    <div class="flex justify-end pt-2">
-                                        <button
-                                            id="saveBtn" class="modal-close px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">Save</button>
-                                        <button
-                                            id="cancelBtn" class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Cancel</button>
                                     </div>
-
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
 
             <div id="listingsSection">
@@ -410,7 +408,8 @@
                         <!--Template Card-->
                         <div class="bg-gray-900 border border-gray-800 rounded shadow">
                             <div class="border-b border-gray-800 p-3">
-                                <h5 class="font-bold uppercase text-gray-600"><a href="/product/{{product.id}}">{{product.product_name}}</a></h5>
+                                <h5 class="font-bold uppercase text-gray-600"><a
+                                        href="/product/{{product.id}}">{{product.product_name}}</a></h5>
                             </div>
                             <div class="block items-center justify-between p-5">
                                 <img class="mx-auto" src="/assets/{{product.type}}/{{product.brand}}.jpg">
